@@ -1,0 +1,16 @@
+body {
+    padding: 10px;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+    border: 15px;
+}
+
+div {
+    width: 300px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+}

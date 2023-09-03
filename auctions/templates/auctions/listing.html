@@ -1,0 +1,38 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listing Page</h2>
+
+    <!-- if singed in, user should be able to bid on them
+    
+        bid: at least as large as the starting bid, greater than any bids that have been placed
+        else display error
+
+        if listging is made by user, add an option to close the auction.
+            make the highst bidder win the auction and make listing inactive
+
+        if listing is closed by the user, display "you won this listing"
+
+        add comments to the listing page
+        display all comments that have been made on the listing
+    -->
+
+    <h2>Listing: {{listing.title}}</h2>
+
+    <div>
+
+        <img src={{listing.image}} alt="image here" width ="50" height="100">
+        <li> bid value : {{listing.bid_value}} </li>
+
+        <ul>
+            <h3>Details</h3>
+            <li> Listed by: {{listing.creator_id}}</li>
+            <li> category: {{listing.category}}</li>
+        </ul>
+        <!-- <li> {{listing.active_status}} </li> -->
+        <!-- <li> created: {{listing.created_date}}</li> -->
+        
+    </div>
+    <!-- onclick redirect to listing page -->
+
+{% endblock %}
