@@ -1,7 +1,6 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Listing Page</h2>
 
     <!-- if singed in, user should be able to bid on them
     
@@ -22,7 +21,22 @@
     <div>
 
         <img src={{listing.image}} alt="image here" width ="50" height="100">
-        <li> bid value : {{listing.bid_value}} </li>
+        <p>{{listing.description}}</p>
+        <!-- django forms -->
+        <form action="{% url 'listingPage' id=listing.id %}" method="post">
+            {% csrf_token %}
+            
+            {{ forms }}
+            <div class="form-group">
+                {{ form.bid_value }}
+            </div>
+        
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Place Bid">
+            </div>
+        </form>
+
+            <li> bid value : {{listing.bid_value}} </li>
 
         <ul>
             <h3>Details</h3>

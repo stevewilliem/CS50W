@@ -3,25 +3,25 @@
 {% block body %}
     <h2>Active Listings</h2>
     {% for listing in listings %}
-    <div>
-        <ul>
-            <li> <a href="{% url 'listingPage' id=listing.id %}">listing {{listing.id}}</a> 
-                <ul>
-                    <div>
-                        <img src={{listing.image}} alt="image here" width ="250" height="250">
-                        <li> <a href="{% url 'listingPage' id=listing.id %}">{{listing.title}}</a></li>
-                        <li> listing ID: {{listing.id}}</li>
-                        <li> bid value : {{listing.bid_value}} </li>
-                        <li> {{listing.active_status}} </li>
-                        <li> category: {{listing.category}}</li>
-                        <li> listed by: {{listing.creator_id}}</li>
-                        <li> listed on: {{listing.created_date}}</li>
-                    </div>
-                </ul>
-            </li>
-        </ul>
-    </div>
+    <ul>
+        <div class="content">
+            <div>
+                <img src={{listing.image}} alt="image here" width ="250" height="250">
+            </div>
+            
+            <div>
+                <!-- <a href="{% url 'listingPage' id=listing.id %}">listing {{listing.id}}</a>  -->
+                <h3><a href="{% url 'listingPage' id=listing.id %}">{{listing.title}} </a></h3>
+                <!-- <li> listing ID: {{listing.id}}</li> -->
+                <h6> <b>Price:</b> <span>&#36</span>{{listing.bid_value}} </h6>
+                <!-- <li> {{listing.active_status}} </li>
+                <li> category: {{listing.category}}</li>
+                <li> listed by: {{listing.creator_id}}</li> -->
+                <h10> created {{listing.created_date}}</h10>
+            </div>
+            
+        </div>
+    </ul>
     <!-- onclick redirect to listing page -->
     {% endfor %}
-    TODO CREATE FORMS FOR USER TO SUBMIT BID VALUE
 {% endblock %}

@@ -4,13 +4,21 @@ body {
 
 img {
     max-width: 100px;
-    height: auto;
-    border: 15px;
+    height: 200px;
+    border: 2px solid green;
+    margin-right: 20px;
 }
 
-div {
-    width: 300px;
-    border: 15px solid green;
-    padding: 50px;
-    margin: 20px;
+ul {
+    padding: 0px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    border: 0.1px solid lightgrey;
+    padding: 10px;
+    margin: 0px;
+    border-radius: 6px;
 }

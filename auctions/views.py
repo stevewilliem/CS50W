@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ValidationError
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -21,8 +22,26 @@ def index(request):
     })
 
 def listingPage(request, id):
+    item = auction.objects.get(pk=id)
+    form = bidPriceForm(request.POST, instance = item)
+    if request.method == "POST":
+        
+        if form.is_valid():
+            print("form valid")
+            bid = form.cleaned_data['bid_value']
+            item.bid_value = bid
+            item.save()
+
+        else:
+            form = bidPriceForm(instance=item)
+
+            # for field in form:
+            #     print("FIELD ERROR:", field.name, field.errors)
+
+
     return render(request, "auctions/listing.html",{
-        "listing" : auction.objects.get(pk=id) #pk stands for primary key
+        "listing" : auction.objects.get(pk=id), #pk stands for primary key
+        "form": form
     })
 
 def createListing(request):
@@ -32,14 +51,12 @@ def createListing(request):
         if form.is_valid():
             title_id = form.cleaned_data['title']
             description_id = form.cleaned_data['description']
-            bid = form.cleaned_data['bid_value']
-            # img_url = form.cleaned_data['image']
+            listing_price = form.cleaned_data['price']
             cat = form.cleaned_data['category'] 
 
             listing = auction(title = title_id, 
                               description = description_id,
-                              bid_value = bid,
-                            #   image = img_url,
+                              price = listing_price,
                               image = forms.ImageField(),
                               category = cat,
                               active_status = True,
@@ -63,6 +80,9 @@ def createListing(request):
 def categories(request):
     return render(request, "auctions/categories.html"
     )
+
+def watchlist(request):
+    return
 
 def login_view(request):
     if request.method == "POST":
